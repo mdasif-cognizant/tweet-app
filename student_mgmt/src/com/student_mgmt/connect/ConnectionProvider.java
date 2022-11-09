@@ -12,7 +12,7 @@ public class ConnectionProvider {
 	
 	try {
 		//Loading Driver 
-//		Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		//Creating Connection to database
 		String userName ="root";

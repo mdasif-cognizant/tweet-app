@@ -33,4 +33,31 @@ public class StudentDAO {
 		return status;
 	}
 
+	public static boolean deleteStudentToDB(int studentID) {
+		boolean status = false;
+
+		try {
+
+			Connection con = ConnectionProvider.createConnection();
+			String query1 = "DELETE from Students where sid= ?";
+
+			PreparedStatement psmt = con.prepareStatement(query1);
+
+			// Setting values to Parameter
+			
+			psmt.setInt(1, studentID);
+
+			psmt.executeUpdate();
+			status = true;
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+		
+		
+	}
+
 }

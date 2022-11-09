@@ -23,6 +23,7 @@ public class Main {
 
 			int choice = Integer.parseInt(br.readLine());
 
+			// Adding Student
 			if (choice == 1) {
 				System.out.println("Enter Student Name- :");
 				String name = br.readLine();
@@ -32,18 +33,27 @@ public class Main {
 				String city = br.readLine();
 
 				Student std = new Student(name, phone, city);
-				
-				boolean status=StudentDAO.addStudentToDB(std);
-				if(status) {
-					System.out.println("New Student is Created:");
-				}else {
-					System.out.println("OOPs! Data is not added, Please try again or Contact to system Admin.");
-				}
-				
 
+				boolean status = StudentDAO.addStudentToDB(std);
+				if (status) {
+					System.out.println("\nNew Student is Created:\n");
+				} else {
+					System.out.println("OOPs! Data is not added, Please try again or Contact to system Admin.\n");
+				}
+
+				// Deleting Student
 			} else if (choice == 2) {
 
-				// delete student
+				System.out.println("Enter ID of Student :");
+				int studentID = Integer.parseInt(br.readLine());
+				boolean status = StudentDAO.deleteStudentToDB(studentID);
+
+				if (status) {
+					System.out.println("\nStudent is Deleted Successfully:");
+				} else {
+					System.out.println("\nOOPs! Data is not Deleted, Please try again or Contact to system Admin.");
+
+				}
 			}
 
 			else if (choice == 3) {
@@ -56,7 +66,7 @@ public class Main {
 			} else {
 
 			}
-			System.out.println("Thank You for using Student Management Application");
+			System.out.println("\nThank You for using Student Management Application\n");
 		}
 
 	}
