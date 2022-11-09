@@ -20,7 +20,7 @@ public class HashSetDemo {
 		System.out.println(list);
 		System.out.println("");
 
-		list.remove(4);
+		list.remove("Banana");
 		
 		Iterator itr = list.iterator();
 		while (itr.hasNext()) {
