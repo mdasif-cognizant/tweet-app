@@ -58,16 +58,21 @@ public class Main {
 
 			else if (choice == 3) {
 
-				// display student
+				boolean status = StudentDAO.displayAllStudents();
+
+				if (!status) {
+					System.out.println("\nOOPs! Data is not Found, Please try again or Contact to system Admin.");
+				} 
 
 			} else if (choice == 4) {
 
-				// exit
+				break;
 			} else {
 
 			}
-			System.out.println("\nThank You for using Student Management Application\n");
+			
 		}
+		System.out.println("\nThank You for using Student Management Application\n");
 
 	}
 
