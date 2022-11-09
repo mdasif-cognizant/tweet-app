@@ -2,7 +2,7 @@ package com.java_oops.collections;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
-import java.util.TreeSet;
+
 
 public class PriorityQueueDemo {
 
