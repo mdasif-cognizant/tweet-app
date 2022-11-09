@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.student_mgmt.connect.StudentDAO;
+import com.student_mgmt.student.Student;
+
 public class Main {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -21,7 +24,22 @@ public class Main {
 			int choice = Integer.parseInt(br.readLine());
 
 			if (choice == 1) {
-				// add student
+				System.out.println("Enter Student Name- :");
+				String name = br.readLine();
+				System.out.println("Enter Student Phone Number :");
+				String phone = br.readLine();
+				System.out.println("Enter Stiudent City");
+				String city = br.readLine();
+
+				Student std = new Student(name, phone, city);
+				
+				boolean status=StudentDAO.addStudentToDB(std);
+				if(status) {
+					System.out.println("New Student is Created:");
+				}else {
+					System.out.println("OOPs! Data is not added, Please try again or Contact to system Admin.");
+				}
+				
 
 			} else if (choice == 2) {
 
@@ -40,8 +58,6 @@ public class Main {
 			}
 			System.out.println("Thank You for using Student Management Application");
 		}
-		
-		
 
 	}
 
