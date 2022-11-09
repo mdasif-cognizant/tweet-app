@@ -22,7 +22,7 @@ public class HashSetDemo {
 
 		list.remove("Banana");
 		
-		Iterator itr = list.iterator();
+		Iterator<String> itr = list.iterator();
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}

@@ -22,7 +22,7 @@ public class LinkedHashSetDemo {
 
 		list.remove("HCL");
 
-		Iterator itr = list.iterator();
+		Iterator<String> itr = list.iterator();
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 
