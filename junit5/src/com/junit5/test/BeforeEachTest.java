@@ -2,6 +2,7 @@ package com.junit5.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,12 @@ public class BeforeEachTest {
 		System.out.println("Before Each Called......");
 	}
 
+	@AfterEach
+	public void afterEachTest() {	
+		
+		System.out.println("After Each Called......");
+	}
+	
 	@Test
 	@DisplayName("Adding two numbers")
 	void testadd() {
