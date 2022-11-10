@@ -95,8 +95,10 @@ public class StartTweetApp {
 							
 						} else if (select == 2) {
 							// view my tweet
+							TweetDAO.viewMyTweets(userId);
 						} else if (select == 3) {
 							// view all tweet
+							TweetDAO.viewAllTweets();
 						} else if (select == 4) {
 							// view all users
 						} else if (select == 5) {
