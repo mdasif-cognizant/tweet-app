@@ -62,25 +62,54 @@ public class TweetDAO {
 
 	}
 
-	
 	public static boolean viewMyTweets(String userId) {
 		boolean status = false;
 
 		try {
 
-			String query = String.format("SELECT tweet FROM tweets where email=%s", userId);
+			String query = String.format("SELECT tweet FROM tweets where email='%s'", userId);
 			System.out.println(query);
 
 			Statement stmt = con.createStatement();
-			
+
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 
-				
 				String tweet = rs.getString(1);
 
-				
+				System.out.println(userId);
 				System.out.println("Tweet : " + tweet);
+				System.out.println("");
+				System.out.println("----------------------------------");
+			}
+
+			status = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+
+	}
+
+	public static boolean viewAllUsers() {
+		boolean status = false;
+
+		try {
+			
+			int count=0;
+
+			String query = "SELECT * FROM user";
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+                count +=1;
+				String username = rs.getString(1);
+
+				System.out.println(count+". "+ username);
+
 				System.out.println("");
 				System.out.println("----------------------------------");
 			}

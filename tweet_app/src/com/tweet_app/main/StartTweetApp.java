@@ -12,7 +12,8 @@ import com.tweet_app.user.User;
 public class StartTweetApp {
 
 	public static void main(String[] args) throws SQLException {
-		boolean stop = true;;
+		boolean stop = true;
+		;
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("*********** Welcome to Tweet App ***********\n");
@@ -60,14 +61,14 @@ public class StartTweetApp {
 			case 2: {
 				System.out.println("************* Login ****************\n");
 				System.out.println("");
-				System.out.println("Enter your Login ID (Email) :         ");
+				System.out.println("Enter your Login ID (Email-ID) :         ");
 				String userId = sc.next();
 				System.out.println("Enter your password :                 ");
 				String pwd = sc.next();
 
-				boolean valid = UserDAO.userValidation(userId, pwd);
+				boolean valid = UserDAO.userValidate(userId, pwd);
 				if (valid) {
-					System.out.println("Congrats.! You logged in ");
+					System.out.println("Login in successfully ");
 					while (true) {
 
 						System.out.println("          1.Post Tweet                           ");
@@ -86,13 +87,13 @@ public class StartTweetApp {
 							// post tweet
 							System.out.println("Welcome!!! You can Post here........");
 							System.out.println("tweet : ");
-						    String post = sc.next();
-						    post+= sc.nextLine();
-							
-							Tweet newtweet=new Tweet(userId,post);
-							
+							String post = sc.next();
+							post += sc.nextLine();
+
+							Tweet newtweet = new Tweet(userId, post);
+
 							TweetDAO.postTweet(newtweet);
-							
+
 						} else if (select == 2) {
 							// view my tweet
 							TweetDAO.viewMyTweets(userId);
@@ -101,10 +102,28 @@ public class StartTweetApp {
 							TweetDAO.viewAllTweets();
 						} else if (select == 4) {
 							// view all users
+							TweetDAO.viewAllUsers();
 						} else if (select == 5) {
 							// reset password
+							System.out.println("--------------Reset Your Password-----------------\n");
+							System.out.println("Enter your old password :");
+							String oldPassword = sc.next();
+							boolean test = UserDAO.resetOldPassword(userId, oldPassword);
+							if (test) {
+								System.out.println("Enter new password");
+								String newPassword = sc.next();
+								boolean changed = UserDAO.resetPassword(newPassword, userId);
+								if (changed) {
+									System.out.println("Your password is successfully changed.");
+								}
+							} else {
+								System.out.println("Your entered password is incorrect.");
+							}
+
 						} else if (select == 6) {
 							// logout
+							System.out.println("You have been logged out successfully.");
+							break;
 						}
 
 					}
@@ -122,31 +141,32 @@ public class StartTweetApp {
 				System.out.println("");
 				System.out.println("Enter your Login ID (Email) :         ");
 				String id = sc.next();
-//				System.out.println("Enter your User Name :                ");
-//				String usr = sc.next();
-				boolean status= UserDAO.validatePassword(id);
-				if(status) {
+				boolean status = UserDAO.validatePassword(id);
+				if (status) {
 					System.out.println("Enter new password : ");
-					String newPassword=sc.next();
-					UserDAO.resetPassword(newPassword, id);
-					
-					break;
+					String newPassword = sc.next();
+					boolean test = UserDAO.resetPassword(newPassword, id);
+					if (test) {
+						System.out.println("Your password is successfully changed.");
+					}
+
+				} else {
+					System.out.println("Warning!!!! Please Enter valid Email-Id : \n");
 				}
+				break;
 
 			case 4:
 				// Exit from application
-				stop=false;
+				stop = false;
 				break;
 			default:
 				System.out.println("WARNING!!!!  Please Choose Correct Option.");
 
 			}
-			
+
 		}
 		System.out.println("----------------------------------------");
-		System.out.println("Thank You for using Tweet Application.\n"
-				         + "!!!!!!!!!!!!******************!!!!!!!!!!!\n");
-
+		System.out.println("Thank You for using Tweet Application.\n" + "!!!!!!!!!!!!******************!!!!!!!!!!!\n");
 
 	}
 

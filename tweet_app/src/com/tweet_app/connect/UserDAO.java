@@ -34,21 +34,25 @@ public class UserDAO {
 
 	}
 
-	public static boolean userValidation(String userId, String pwd) {
+	public static boolean userValidate(String userId, String pwd) {
 		boolean status = false;
 		try {
 
-			String query = ("SELECT email,password FROM user ");
+			String query = ("SELECT * FROM user ");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				String email = rs.getString(1);
-				String password = rs.getString(2);
+                String user =rs.getString(1);
+                System.out.println(user);
+				String email = rs.getString(2);
+				String password = rs.getString(3);
 
 				if (email.equals(userId) && password.equals(pwd)) {
 
 					status = true;
+					System.out.println("Hi "+user);
+					System.out.println("Login in successfully");
 
 				}
 			}
@@ -61,16 +65,28 @@ public class UserDAO {
 
 	}
 
-	public static void resetPassword(String newPassword, String id) throws SQLException {
+	public static boolean resetPassword(String newPassword, String id)  {
+		
+		boolean status=false;
+		try {
+			String query = "update user set password=? where email=?";
+			PreparedStatement psmt = con.prepareStatement(query);
+			psmt.setString(1, newPassword);
+			psmt.setString(2, id);
 
-		String query = "update user set password=? where email=?";
+			psmt.executeUpdate();
+			
+			status=true;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 
-		PreparedStatement psmt = con.prepareStatement(query);
-		psmt.setString(1, newPassword);
-		psmt.setString(2, id);
+		}
+		return status;
 
-		psmt.executeUpdate();
-		System.out.println("Password Updated Succcessfully");
+		
+		
 
 	}
 
@@ -91,6 +107,34 @@ public class UserDAO {
 					status = true;
 
 				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+
+	}
+
+	public static boolean resetOldPassword(String userId, String oldPassword) {
+
+		boolean status = false;
+		try {
+
+			String query = String.format("SELECT password FROM user where email='%s'", userId);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+
+				String password = rs.getString(1);
+
+				if (password.equals(oldPassword)) {
+					
+
+					status = true;
+
+			}
 			}
 
 		} catch (Exception e) {
