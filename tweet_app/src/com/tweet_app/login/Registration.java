@@ -1,5 +1,7 @@
 package com.tweet_app.login;
 
-public class Register {
+public class Registration {
+	
+	
 
 }
