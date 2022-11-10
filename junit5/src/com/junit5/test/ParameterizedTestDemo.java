@@ -2,6 +2,7 @@ package com.junit5.test;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ParameterizedTestDemo {
@@ -28,4 +29,17 @@ public class ParameterizedTestDemo {
 		System.out.println(laptop);
 		
 	}
+	
+	private static String[] cars() {
+		return  new String[] {"Hundai","Maruti","BMW","Porche"}; 
+	}
+	
+	@ParameterizedTest
+	@MethodSource("cars")
+	public void methodSourseTest(String cars) {
+		System.out.println(cars);
+	}
+
+		
+	
 }
