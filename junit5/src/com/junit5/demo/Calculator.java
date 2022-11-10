@@ -7,7 +7,7 @@ public class Calculator {
 		return total;
 	}
 	
-	public static int stb(int a,int b) {
+	public static int sub(int a,int b) {
 		int total =a-b;
 		return total;
 	}
