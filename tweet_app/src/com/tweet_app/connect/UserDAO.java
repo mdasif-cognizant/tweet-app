@@ -3,7 +3,6 @@ package com.tweet_app.connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.tweet_app.user.User;
@@ -12,7 +11,7 @@ public class UserDAO {
 
 	private static Connection con = ConnectionProvider.createConnection();
 
-	public static boolean registerNewUser(User user) throws SQLException {
+	public static boolean registerNewUser(User user)  {
 
 		boolean status = false;
 		try {
@@ -43,16 +42,15 @@ public class UserDAO {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-                String user =rs.getString(1);
-                System.out.println(user);
+                String user = rs.getString(1).toUpperCase();
 				String email = rs.getString(2);
 				String password = rs.getString(3);
 
 				if (email.equals(userId) && password.equals(pwd)) {
 
 					status = true;
-					System.out.println("Hi "+user);
-					System.out.println("Login in successfully");
+					System.out.println("Hi "+user+", You have logged in successfully");
+					System.out.println("");
 
 				}
 			}
