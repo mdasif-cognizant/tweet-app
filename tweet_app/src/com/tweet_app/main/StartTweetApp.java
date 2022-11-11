@@ -13,6 +13,9 @@ public class StartTweetApp {
 		boolean stop = true;
 		System.out.println("");
 		Scanner sc = new Scanner(System.in);
+		Login login = new Login();
+		ForgetPassword forget = new ForgetPassword();
+		Registration registerUser = new Registration();
 
 		System.out.println("*********** Welcome to Tweet App ***********\n");
 
@@ -31,17 +34,17 @@ public class StartTweetApp {
 			switch (choose) {
 
 			case 1: {
-				Registration.userRegistration();
+				registerUser.userRegistration();
 				break;
 			}
 
 			case 2: {
-				Login.loginUser();
+				login.loginUser();
 				break;
 			}
 			// Forget Password
 			case 3:
-				ForgetPassword.forgetPassword();
+				forget.forgetPassword();
 				break;
 			// Exit from Application
 			case 4:

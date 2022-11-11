@@ -7,9 +7,11 @@ import com.tweet_app.connect.UserDAO;
 import com.tweet_app.user.User;
 
 public class Registration {
-	static Scanner sc = new Scanner(System.in);
+	 Scanner sc = new Scanner(System.in);
+	 UserDAO userDAO = new UserDAO();
+	
 
-	public static void userRegistration() throws SQLException {
+	public  void userRegistration() throws SQLException {
 
 		System.out.println("*********** Registration ***********\n");
 		System.out.println("");
@@ -22,7 +24,7 @@ public class Registration {
 		String email = sc.next();
 
 		User user = new User(name, email, password);
-		boolean status = UserDAO.registerNewUser(user);
+		boolean status = userDAO.registerNewUser(user);
 		if (status) {
 			System.out.println("Congratulations! You are Successfully Registerd in Tweet App.");
 		} else {

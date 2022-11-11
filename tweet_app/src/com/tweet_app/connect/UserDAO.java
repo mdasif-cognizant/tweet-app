@@ -9,9 +9,9 @@ import com.tweet_app.user.User;
 
 public class UserDAO {
 
-	private static Connection con = ConnectionProvider.createConnection();
+	private Connection con = ConnectionProvider.createConnection();
 
-	public static boolean registerNewUser(User user)  {
+	public boolean registerNewUser(User user)  {
 
 		boolean status = false;
 		try {
@@ -33,7 +33,7 @@ public class UserDAO {
 
 	}
 
-	public static boolean userValidate(String userId, String pwd) {
+	public  boolean userValidate(String userId, String pwd) {
 		boolean status = false;
 		try {
 
@@ -63,7 +63,7 @@ public class UserDAO {
 
 	}
 
-	public static boolean resetPassword(String newPassword, String id)  {
+	public boolean resetPassword(String newPassword, String id)  {
 		
 		boolean status=false;
 		try {
@@ -88,7 +88,7 @@ public class UserDAO {
 
 	}
 
-	public static boolean validatePassword(String id) {
+	public boolean validatePassword(String id) {
 
 		boolean status = false;
 		try {
@@ -115,7 +115,7 @@ public class UserDAO {
 
 	}
 
-	public static boolean resetOldPassword(String userId, String oldPassword) {
+	public  boolean resetOldPassword(String userId, String oldPassword) {
 
 		boolean status = false;
 		try {

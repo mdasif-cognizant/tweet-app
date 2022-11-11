@@ -9,9 +9,9 @@ import com.tweet_app.user.Tweet;
 
 public class TweetDAO {
 
-	private static Connection con = ConnectionProvider.createConnection();
+	private  Connection con = ConnectionProvider.createConnection();
 
-	public static boolean postTweet(Tweet tweet) {
+	public  boolean postTweet(Tweet tweet) {
 
 		boolean status = false;
 		try {
@@ -22,6 +22,8 @@ public class TweetDAO {
 			psmt.setString(2, tweet.getpost());
 
 			psmt.executeUpdate();
+			System.out.println("\nTweet :"+tweet.getpost());
+			System.out.println("\nAwesome! Your tweet is posted Successfully.\n");
 			status = true;
 
 		} catch (Exception e) {
@@ -32,7 +34,7 @@ public class TweetDAO {
 
 	}
 
-	public static boolean viewAllTweets() {
+	public  boolean viewAllTweets() {
 		boolean status = false;
 
 		try {
@@ -62,22 +64,26 @@ public class TweetDAO {
 
 	}
 
-	public static boolean viewMyTweets(String userId) {
+	public  boolean viewMyTweets(String userId) {
 		boolean status = false;
 
 		try {
 
 			String query = String.format("SELECT tweet FROM tweets where email='%s'", userId);
-			System.out.println(query);
-
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(query);
+
+			if((!rs.isBeforeFirst() && rs.getRow() == 0)) {
+				System.out.println("Sorry!!! You have not posted anything yet.");
+			}
+
 			while (rs.next()) {
+				
 
 				String tweet = rs.getString(1);
 
-				System.out.println(userId);
+				
 				System.out.println("Tweet : " + tweet);
 				System.out.println("");
 				System.out.println("----------------------------------");
@@ -93,22 +99,22 @@ public class TweetDAO {
 
 	}
 
-	public static boolean viewAllUsers() {
+	public  boolean viewAllUsers() {
 		boolean status = false;
 
 		try {
-			
-			int count=0;
+
+			int count = 0;
 
 			String query = "SELECT * FROM user";
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-                count +=1;
+				count += 1;
 				String username = rs.getString(1);
 
-				System.out.println(count+". "+ username);
+				System.out.println(count + ". " + username);
 
 				System.out.println("");
 				System.out.println("----------------------------------");

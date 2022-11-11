@@ -8,8 +8,10 @@ import com.tweet_app.user.Tweet;
 
 public class Login {
 	static Scanner sc = new Scanner(System.in);
+	TweetDAO tweetDAO = new TweetDAO();
+	UserDAO userDAO = new UserDAO();
 
-	public static void loginUser() {
+	public  void loginUser() {
 
 		System.out.println("************* Login ****************\n");
 		System.out.println("");
@@ -18,7 +20,7 @@ public class Login {
 		System.out.println("Enter your password :                 ");
 		String pwd = sc.next();
 
-		boolean valid = UserDAO.userValidate(userId, pwd);
+		boolean valid = userDAO.userValidate(userId, pwd);
 		if (valid) {
 
 			while (true) {
@@ -43,19 +45,19 @@ public class Login {
 					String post = sc.next();
 					post += sc.nextLine();
 					Tweet newtweet = new Tweet(userId, post);
-					TweetDAO.postTweet(newtweet);
+					tweetDAO.postTweet(newtweet);
 
 				// View My Tweets
 				} else if (select == 2) {
-					TweetDAO.viewMyTweets(userId);
+					tweetDAO.viewMyTweets(userId);
 
 				// view all tweet
 				} else if (select == 3) {
-					TweetDAO.viewAllTweets();
+					tweetDAO.viewAllTweets();
 
 				// View all users
 				} else if (select == 4) {
-					TweetDAO.viewAllUsers();
+					tweetDAO.viewAllUsers();
 
 				// Reset password
 				} else if (select == 5) {
@@ -63,11 +65,11 @@ public class Login {
 					System.out.println("--------------Reset Your Password-----------------\n");
 					System.out.println("Enter your old password :");
 					String oldPassword = sc.next();
-					boolean test = UserDAO.resetOldPassword(userId, oldPassword);
+					boolean test = userDAO.resetOldPassword(userId, oldPassword);
 					if (test) {
 						System.out.println("Enter new password");
 						String newPassword = sc.next();
-						boolean changed = UserDAO.resetPassword(newPassword, userId);
+						boolean changed = userDAO.resetPassword(newPassword, userId);
 						if (changed) {
 							System.out.println("Your password is successfully changed.");
 						}
